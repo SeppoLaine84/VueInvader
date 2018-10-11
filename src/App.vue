@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Home msg="Vue.js INVEDER!" />
+        <Home msg="Vue.js INVEDERS!" />
     </div>
 </template>
 
