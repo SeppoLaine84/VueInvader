@@ -1,0 +1,19 @@
+﻿body {
+  font-family: Consolas;
+  background: #222;
+  color: #33ee33;
+}
+a {
+  color: #ffb000;
+}
+#main {
+  margin-top: 40px;
+}
+.container {
+  margin: auto;
+  width: 75%;
+}
+#invader-canvas {
+  width: 320px;
+  height: 240px;
+}
