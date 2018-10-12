@@ -1,8 +1,9 @@
 <template>
-    <div id="app">
-        <Home msg="Vue.js INVEDERS!" />
+    <div id="app" class="home container">
+        <Home msg="VueINVADER!" />
     </div>
 </template>
+
 
 <script>
     import Home from './components/Home.vue';

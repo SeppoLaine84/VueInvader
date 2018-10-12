@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "VueInvader", "VueInvader.njsproj", "{6E80DEE4-86D3-45FE-A19B-6AB6F0B428A1}"
 EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "VueInvaderBackEnd", "..\VueInvaderBackEnd\VueInvaderBackEnd.njsproj", "{AE95063E-984E-45F3-9939-6D27762ABCB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6E80DEE4-86D3-45FE-A19B-6AB6F0B428A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E80DEE4-86D3-45FE-A19B-6AB6F0B428A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E80DEE4-86D3-45FE-A19B-6AB6F0B428A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE95063E-984E-45F3-9939-6D27762ABCB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE95063E-984E-45F3-9939-6D27762ABCB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE95063E-984E-45F3-9939-6D27762ABCB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE95063E-984E-45F3-9939-6D27762ABCB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -32,6 +32,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include=".babelrc" />
+    <Content Include="src\components\Modal.vue">
+      <SubType>Code</SubType>
+    </Content>
     <None Include="compilerconfig.json" />
     <Content Include="compilerconfig.json.defaults">
       <SubType>Content</SubType>
@@ -43,6 +46,9 @@
     <Compile Include="src\assets\style.less">
       <SubType>Code</SubType>
     </Compile>
+    <Content Include="public\img\player_ship.png">
+      <Publish>True</Publish>
+    </Content>
     <Content Include="src\assets\style.css">
       <SubType>Content</SubType>
       <DependentUpon>src\assets\style.less</DependentUpon>
@@ -51,6 +57,9 @@
       <SubType>Content</SubType>
       <DependentUpon>src\assets\style.css</DependentUpon>
     </Content>
+    <Content Include="src\components\Highscores.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\Home.vue" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -58,11 +67,26 @@
   <ItemGroup>
     <Folder Include="dist\" />
     <Folder Include="public\" />
+    <Folder Include="public\img\" />
     <Folder Include="src\" />
     <Folder Include="src\assets\" />
+    <Folder Include="src\assets\sprites\" />
     <Folder Include="src\components\" />
+    <Folder Include="src\Game\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\datastore.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Game\GameEngine.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Game\GameObjects.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Game\Helpers.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="src\main.js" />
     <Compile Include=".postcssrc.js" />
   </ItemGroup>
