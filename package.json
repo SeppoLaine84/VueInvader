@@ -1,24 +1,27 @@
 {
-  "name": "vue-pong",
-  "version": "0.1.0",
+  "name": "VueInvader",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
   },
-  "description": "VuePong",
+  "description": "VueInvader",
   "author": {
-    "name": ""
+    "name": "Seppo Laine"
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "nedb": "^1.8.0",
+    "bootstrap": "^4.1.3",
+    "bootstrap-vue": "^2.0.0-rc.11",
     "vue": "^2.5.16",
-    "vue-pixi": "^0.1.1"
+    "vue-pixi": "^0.1.1",
+    "vue2-animate": "^2.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-rc.10",
     "@vue/cli-service": "^3.0.0-rc.10",
+    "raw-loader": "^0.5.1",
     "vue-template-compiler": "^2.5.16"
   },
   "browserslist": [

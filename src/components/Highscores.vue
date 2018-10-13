@@ -1,13 +1,21 @@
 ﻿<template>
-    <div id="highscores" style="float:left">
-        <h3>ALLTIME TOP-10</h3>
-        <ul>
-            <li v-for="item, index in highscoreTable" v-if="item.score > 0 && index < 10" >
-                <span class="position">#{{ index+1 }}</span>
-                <span class="score">{{ item.score }}</span>
-                <span class="player-name">{{ item.name.substring(0, 12) }}</span>
-            </li>
-        </ul>
+    <div id="highscores"  class="w-25">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="3">
+                        ALLTIME BEST PLAYERS
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item, index in highscoreTable" v-if="item.score > 0 && index < 10">
+                    <td class="position">#{{ index+1 }}</td>
+                    <td class="score">{{ item.score }}</td>
+                    <td class="player-name">{{ item.name.substring(0, 12) }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 

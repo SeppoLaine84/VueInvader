@@ -1,17 +1,15 @@
-
-
 <template>
-
     <div id="main">
         <Highscores ref="highscore_el" />
-        <div id="invader-canvas">
-            <canvas id="cvs"></canvas>
+        <div id="invader-canvas" class="w-50">
+                                    
+            <C64Console  v-show="!running"></C64Console>
+            <canvas id="cvs"  v-show="running"></canvas>
         </div>
+
+
+
         <modal v-if="showModal" @close="closeModal()">
-            <!--
-      you can use custom content here to overwrite
-      default content
-    -->
             <h3 slot="header">
                 GAME OVER
                 <br />
@@ -19,237 +17,182 @@
             </h3>
             <div slot="body">
                 <p>Please, enter your name:</p>
-                <input type="text" id="player_name" v-model="player.Name" />
+                <input type="text" id="player_name" v-model="engine.GameData.player.Name" />
             </div>
-            <button slot="footer" class="modal-default-button" @click="closeModal()">
+            <button slot="footer" class="modal-default-button" @click="closeModal">
                 OK
             </button>
         </modal>
+
+        <footer>
+            <div class="container">
+                <section class="w-25">
+                    <h3>
+                        This site probably won't work with mobile devices and all browsers!
+                        <br />
+                        <small>
+                            Works best with Chrome and atleast FullHD monitor.
+                        </small>
+                    </h3>
+                </section>
+                <section class="w-50 ">
+                    <h3 class="text-center">
+                        Small unfinished buggy weekend project<br />
+                        created by <a href="mailto:seppo.laine@lan-addict.fi" _target="blank">Seppo Laine</a>
+                    </h3>
+                </section>
+                <section class="w-25">
+                    <h3 class="text-left">
+                        Source code available at <a href="https://github.com/SeppoLaine84/VueInvader/tree/master/src" _target="blank">GitHub</a>
+                    </h3>
+                </section>
+                <div class="clearfix"></div>
+            </div>
+        </footer>
     </div>
 
 </template>
 
-
 <script>
-    import { setTimeout } from 'timers';
+
+    import { setTimeout, setInterval, clearInterval } from 'timers';
     import Highscores from './Highscores.vue';
     import { GameEngine } from './../Game/GameEngine.js';
+    import { Timer } from './../Game/Helpers';
+    import C64Console from './C64Console.vue';
 
-    var engine, renderer, container;
+
+    var engine;
     var enemySpawnTimer;
-       
+
     export default {
         name: 'Home',
         components: {
-            Highscores
+            Highscores,
+            C64Console
         },
-        props: {
-            msg: String,
-        },
-
         data() {
             return {
                 showModal: false,
-                engine:engine
+                engine: engine,
+                running: false,
+                scoreTimer: undefined,
+                gameoverOnce: true,
+                lines: [],
+                currentLine: ""
             }
         },
-
         mounted: function () {
-
-            this.drawCanvas();
+            this.focusC64Input();
+            engine = new GameEngine("cvs");
+            this.engine = engine;
         },
-
         methods: {
-
-            saveHighscore() {
-                this.$refs.highscore_el.addHighscore(this.player.Name, this.score);
+            focusC64Input: function () {
+                document.getElementById("c64input").focus();
             },
-
-          
+            C64Command: function () {
+                var val = document.getElementById("c64input").value;
+                this.lines.push(val);
+                this.currentLine = "";
+            },
             closeModal: function () {
-                this.showModal = false;
+                this.showModal = !this.showModal;
                 this.saveHighscore();
+                engine.GameData.player = {};
             },
-
-            drawCanvas: function () {
+            // Custom update function
+            GameUpdate() {
+                var _self = this;
+                if (engine.GameData.GameOver) {
+                    if (this.gameoverOnce === true) {
+                        this.gameoverOnce = false;
+                        this.scoreTimer.Stop();
+                        this.running = false;
+                        this.showModal = true;
+                        engine.removeObject(engine.GameData.player);
+                    }
+                }
+            },
+            // Starts game
+            startGame: function () {
+                console.log("Starting game..");
                 var _self = this;
 
-                engine = new GameEngine("cvs");
-                this.engine = engine;
-
-                //this.initRenderer();
+                engine.Update = this.GameUpdate; // Sets custom update function, does stuff after basic gameobject updates
                 this.addContent();
 
-                engine.addScore("SCORE: 0", 5, 5);
+                engine.Start(); // Start rendering
 
-                var postext = engine.addText("TIME", 200, 5);
+                this.scoreTimer = engine.addTimer(
+                    {
+                        timeout: engine.GameInfo.score.constantScoreTimeout,
+                        loop: true,
+                        autostart: true
+                    }, function () {
+                        _self.updateScore(engine.GameInfo.score.constantScoreAmt);
+                    });
 
-                var frag =
-                    `precision mediump float;
-                    uniform vec4 filterArea;
-                    uniform sampler2D uSampler;
-                    uniform float val;
-                    varying vec2 vTextureCoord;
-                    void main (void) {
-                      vec4 col = texture2D(uSampler, vTextureCoord);
-                      if(vTextureCoord.x > val) gl_FragColor = texture2D(uSampler, vec2(val, vTextureCoord.y));
-                      else                      gl_FragColor = col;
-                    }`.split('\n').reduce((c, a) => c + a.trim() + '\n')
-
-                var uniforms = {
-                    val: { type: 'float', value: 0 }
-                };
-                var filter = new PIXI.Filter(null, frag, uniforms);
-
-                var count = 1;
-
-                var gameoverOnce = true;
-
-                function update(time) {
-
-                    _self.updateTime(time);
-                    _self.removeObjects();
-
-                    if (_self.GameOver == false) {
-
-                        _self.mouseData = renderer.plugins.interaction.mouse.global;
-                        _self.mouse = renderer.plugins.interaction.mouse;
-
-                        _self.GameObjects.forEach(function (obj) {
-
-                            if (obj.Update) {
-                                obj.Update();
-                            }
-
-                            if (obj instanceof Bullet == true) {
-                                _self.checkCollisions(obj);
-                            }
-
-                            _self.checkForGameOver(obj);
-                        });
-
-                        GameInfo.enemies.downwardSpeed *= 1.0015;
-
-                    }
-                    else {
-
-                        if (gameoverOnce) {
-                            clearTimeout(enemySpawnTimer);
-                            _self.showModal = true;
-                            gameoverOnce = false;
-                        }
-
-                        // Start cool fadeout effect
-                        if (_self.t - _self.GameOverTime >= GameInfo.gameoverViewTime) {
-
-                            count -= Math.pow(0.15 * Math.random(), 2);
-                            uniforms = {
-                                val: { type: 'float', value: count },
-                                mappedMatrix: { type: 'mat3', value: new PIXI.Matrix() }
-                            };
-                            filter = new PIXI.Filter(null, frag, uniforms);
-                            container.filters = [filter];
-                        }
-                    }
-
-                    renderer.render(container);
-                    requestAnimationFrame(update);
-
-                }
-                //update();
-
+                this.scoreTimer.Start();
+                this.running = true;
             },
 
-            initRenderer() {
-                var cvs = document.getElementById('cvs');
-
-                cvs.width = GameInfo.resolution.width;
-                cvs.height = GameInfo.resolution.height;
-
-                renderer = new PIXI.WebGLRenderer(GameInfo.resolution.width, GameInfo.resolution.height, { backgroundColor: 0x113, view: cvs, antialias: true });
-
-                container = new PIXI.Container();
-
-            },
-
-            checkCollisions(fromObj) {
-                var _self = this;
-
-                this.GameObjects.forEach(function (obj) {
-                    if (obj instanceof Enemy) {
-                        if (fromObj.IsCollided(obj.Area)) {
-
-                            _self.addExplosion(obj.position.x, obj.position.y);
-                            _self.addToRemove(obj);
-                            _self.addToRemove(fromObj);
-                            _self.updateScore(100);
-
-                        }
-                    }
-                });
-            },
-
-            updateTime(time) {
-                this.dt = 0;
-                this.t = time / 10;
-                if (this.lastTime) {
-                    this.dt = (time - this.lastTime) / 1000;
-                }
-                this.lastTime = time;
-            },
-
+            // Add player and enemies to scene
             addContent() {
+                console.log("Loading content...");
 
                 engine.addPlayer();
-                //this.spawnMonsters(GameInfo.enemies.rows);
+                this.gameoverShader = engine.addShader("GameOverFX", 'http://localhost:3000/shaders/gameover.frag', { val: { type: 'float', value: 0 } })
+                this.gameoverShader.update = function () {
+                    count -= Math.pow(0.15 * Math.random(), 2);
+                    uniforms = {
+                        val: { type: 'float', value: count },
+                        mappedMatrix: { type: 'mat3', value: new PIXI.Matrix() }
+                    };
+                    filter = new PIXI.Filter(null, frag, uniforms);
+                    container.filters = [filter];
+                }
+                this.spawnMonsters(engine.GameInfo.enemies.rows);
+                this.enemySpawner();
 
-                //this.enemySpawner();
+                // UI
+                engine.addScore("SCORE: 0", 5, 5);
             },
-
+            // Start spawning more enemies
             enemySpawner() {
                 var _self = this;
                 enemySpawnTimer = setTimeout(function () {
-                    if (_self.GameOver == false) {
-
-                        if (GameInfo.enemies.spawnInterval > 1000)
-                            GameInfo.enemies.spawnInterval -= 250;
+                    if (engine.GameData.GameOver == false) {
+                       
+                        if (engine.GameInfo.enemies.spawnInterval > 1000)
+                            engine.GameInfo.enemies.spawnInterval -= 250;
 
                         _self.spawnMonsters(1);
                         _self.enemySpawner();
                     }
-                }, GameInfo.enemies.spawnInterval)
+                }, engine.GameInfo.enemies.spawnInterval)
             },
-
             spawnMonsters(rows) {
                 for (var y = 0; y < rows; y++) {
-                    for (var x = 0; x < GameInfo.enemies.columns; x++) {
-                        this.addEnemy(GameInfo.enemies.columnStartOffset + (x * GameInfo.enemies.columnSpacing), GameInfo.enemies.rowStartOffset + (y * GameInfo.enemies.rowSpacing));
+                    for (var x = 0; x < engine.GameInfo.enemies.columns; x++) {
+                        engine.addEnemy(engine.GameInfo.enemies.columnStartOffset + (x * engine.GameInfo.enemies.columnSpacing), engine.GameInfo.enemies.rowStartOffset + (y * engine.GameInfo.enemies.rowSpacing));
                     }
                 }
             },
-
+            // Updates score display
             updateScore(amt) {
-                this.score += amt;
-                this.scoreText.setText("SCORE: " + this.score.toString());
+                engine.GameData.score += amt;
+                engine.GameData.scoreText.text = "SCORE: " + engine.GameData.score.toString();
             },
-
-            checkForGameOver(gameObject) {
-
-                if (gameObject instanceof Enemy == true) {
-                    if (gameObject.position.y >= GameInfo.resolution.height - 5) {
-                        this.GameOver = true;
-                        this.GameOverTime = this.t;
-                    }
-                }
-            }
+            // Saves scores to database
+            saveHighscore() {
+                this.$refs.highscore_el.addHighscore(engine.GameData.player.Name, engine.GameData.score);
+            },
         },
         created() {
-
         }
     };
 </script>
-
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>

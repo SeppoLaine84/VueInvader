@@ -32,6 +32,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include=".babelrc" />
+    <Content Include="public\img\bullet.png" />
+    <Content Include="public\img\enemy_ship.png" />
+    <Content Include="public\img\explosion\explosion_0.png" />
+    <Content Include="public\img\explosion\explosion_1.png" />
+    <Content Include="public\img\explosion\explosion_2.png" />
+    <Content Include="public\img\explosion\explosion_3.png" />
+    <Content Include="public\img\explosion\explosion_4.png" />
+    <Content Include="public\img\explosion\explosion_5.png" />
+    <Content Include="public\img\explosion\explosion_6.png" />
+    <None Include="src\assets\styles\modal.less" />
+    <Compile Include="src\assets\styles\styles.less">
+      <Publish>False</Publish>
+    </Compile>
+    <Content Include="src\assets\styles\styles.css" />
+    <Content Include="src\assets\styles\styles.min.css">
+      <Publish>True</Publish>
+    </Content>
     <Content Include="src\components\Modal.vue">
       <SubType>Code</SubType>
     </Content>
@@ -43,19 +60,11 @@
     <Content Include="public\favicon.ico" />
     <Content Include="public\index.html" />
     <Content Include="src\App.vue" />
-    <Compile Include="src\assets\style.less">
+    <None Include="src\assets\styles\style.less">
       <SubType>Code</SubType>
-    </Compile>
+    </None>
     <Content Include="public\img\player_ship.png">
       <Publish>True</Publish>
-    </Content>
-    <Content Include="src\assets\style.css">
-      <SubType>Content</SubType>
-      <DependentUpon>src\assets\style.less</DependentUpon>
-    </Content>
-    <Content Include="src\assets\style.min.css">
-      <SubType>Content</SubType>
-      <DependentUpon>src\assets\style.css</DependentUpon>
     </Content>
     <Content Include="src\components\Highscores.vue">
       <SubType>Code</SubType>
@@ -68,23 +77,37 @@
     <Folder Include="dist\" />
     <Folder Include="public\" />
     <Folder Include="public\img\" />
+    <Folder Include="public\img\explosion\" />
     <Folder Include="src\" />
     <Folder Include="src\assets\" />
+    <Folder Include="src\assets\styles\" />
     <Folder Include="src\assets\sprites\" />
     <Folder Include="src\components\" />
     <Folder Include="src\Game\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\datastore.js">
+    <Compile Include="src\Game\Bullet.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Game\Enemy.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Game\Explosion.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\Game\GameEngine.js">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="src\Game\GameObjects.js">
+    <Compile Include="src\Game\BaseObjects.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\Game\Helpers.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Game\Player.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Game\ShaderFX.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\main.js" />

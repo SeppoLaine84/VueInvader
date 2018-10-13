@@ -16,5 +16,7 @@
     };
 </script>
 
-<style src="./assets/style.min.css">
+<style src="./assets/styles/styles.min.css">
+    
 </style>
+

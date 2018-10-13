@@ -1,0 +1,298 @@
+﻿@font: 'C64', monospace;
+@background:    #222;
+@fontcolor:     #33ee33;
+@linkcolor:     #ffb000;
+
+@c64border: #7c71da;
+@c64background: #3e32a2;
+@c64textcolor: @c64border;
+
+@game-width: 640px;
+@game-height: 480px;
+
+@font-face {
+    font-family: "C64";
+    src: url("fonts/C64_Pro_Mono-STYLE.ttf") format("truetype");
+}
+
+.user-select(@user-select) {
+    -webkit-touch-callout: @user-select;
+    -webkit-user-select: @user-select;
+    -khtml-user-select: @user-select;
+    -moz-user-select: @user-select;
+    -ms-user-select: @user-select;
+    user-select: @user-select;
+}
+
+.transition (@transition) {
+    -webkit-transition: @transition;
+    -moz-transition: @transition;
+    -ms-transition: @transition;
+    -o-transition: @transition;
+}
+
+.ui-hidden-accessible {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px,1px,1px,1px);
+}
+
+.blink_me {
+    animation-name: blinker;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(1,0,0,1);
+    animation-duration: 1s;
+    display: inline-block;
+    border-radius: 1px;
+    box-shadow: 0 0 10px rgba(white,.3);
+    background: @c64border;
+    float:left;
+}
+
+@keyframes blinker {
+    from {
+        opacity: 1.0;
+    }
+
+    to {
+        opacity: 0.0;
+    }
+}
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.hidden {
+    display:none;
+}
+
+.text {
+    &-center {
+        text-align: center !important;
+    }
+
+    &-left {
+        text-align: left !important;
+    }
+
+    &-right {
+        text-align: right !important;
+    }
+
+    &-bold {
+        font-weight: 100;
+    }
+}
+
+
+body {
+    height:100%;
+    font-family: @font;
+    
+    background: @background;
+    color: @fontcolor;
+    .user-select(none);
+}
+
+a {
+    color: @linkcolor;
+}
+
+#main {
+    margin-top:40px;
+}
+
+.container {
+    margin:auto;
+    width:95%;
+}
+
+footer {
+    font-family: 'VT323', monospace;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    font-size: 16px;
+   
+    background: darken(@c64background, 5%);
+
+    .container {
+        padding: 15px 30px;
+    }
+
+    h3 {
+        color: lighten(@c64textcolor, 10%);
+        font-size: 16px;
+        text-align: left;
+        font-weight:400;
+        margin: 0;
+    }
+}
+
+#highscores {
+    background: lighten(@background, 15%);
+    float: left;
+    padding-top: 0px;
+    margin: 0;
+    padding: 15px;
+    padding-right: 30px;
+    border: 13px solid lighten(@background, 10%);
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'C64', monospace;
+    box-shadow: 10px 6px 4px rgba(0,0,0,.4);
+
+    h3 {
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+
+        thead {
+            th {
+                padding-bottom: 10px;
+                border-bottom: 2px solid #333;
+            }
+        }
+
+        tbody {
+            background: lighten(@background, 5%);
+        }
+
+        td {
+            outline: 0;
+            border: 0;
+            padding: 10px 12px;
+        }
+
+        tr {
+            outline: 0;
+            border: 0;
+            padding: 15px;
+        }
+
+        .position {
+            font-style: italic;
+            font-size: 0.9em;
+        }
+
+        .score {
+            vertical-align: central;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .player-name {
+            text-align: right !important;
+        }
+    }
+}
+
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
+
+#invader-canvas {
+    margin: auto;
+    width: @game-width;
+    height: @game-height;
+    background: @c64background;
+    border: 50px solid @c64border;
+    position: relative;
+    height: 100%;
+    margin-left: 40px;
+    box-shadow: 10px 6px 4px rgba(0,0,0,.4);
+}
+
+.c64container {
+    font-family:"C64";
+    position: relative;
+    background: @c64background;
+    height: 480px;
+    color: @c64textcolor;
+    font-size: 14px;
+    
+    padding: 2px;
+    line-height: 20px;
+    margin: auto;
+                
+    span {
+        vertical-align: bottom;
+    }
+
+    .input_text {
+        display: inline-block;
+        text-transform: uppercase;
+        position: relative;
+        float: left;
+
+        &.old-line {
+            display: block;
+            float: none;
+        }
+
+        .error {
+            margin-top: 0.8em;
+        }
+    }
+
+    .cursor {
+        float: right;
+        width: .75em;
+        height: .85em;
+        margin-left: 2px;
+        background: @c64border;
+    }
+}
+
+button {
+    float:left;
+    font-family:Consolas;
+    margin-left:20px;
+    font-size:20px;
+    padding: 15px 10px;    
+    cursor:pointer;
+}
+
+#start_game_btn {
+    position: absolute;
+    left:30%;
+    top:45%;
+    padding: 15px 20px;
+    width:40%;
+    height:15%;
+}
+
+.w {
+
+    &-25 {
+        width: 25%;
+        display: inline-block;
+    }
+
+    &-33 {
+        width: 33%;
+        display: inline-block;
+    }
+
+    &-50 {
+        width: 50%;
+        display: inline-block;
+    }
+
+    &-100 {
+        width: 100%;
+        display: inline-block;
+    }
+}

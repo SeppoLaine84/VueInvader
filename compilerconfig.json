@@ -2,5 +2,13 @@
   {
     "outputFile": "src/assets/style.css",
     "inputFile": "src/assets/style.less"
+  },
+  {
+    "outputFile": "src/assets/styles.css",
+    "inputFile": "src/assets/styles.less"
+  },
+  {
+    "outputFile": "src/assets/styles/styles.css",
+    "inputFile": "src/assets/styles/styles.less"
   }
 ]

@@ -1,0 +1,285 @@
+﻿@font-face {
+  font-family: "C64";
+  src: url("fonts/C64_Pro_Mono-STYLE.ttf") format("truetype");
+}
+.ui-hidden-accessible {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+.blink_me {
+  animation-name: blinker;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(1, 0, 0, 1);
+  animation-duration: 1s;
+  display: inline-block;
+  border-radius: 1px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  background: #7c71da;
+  float: left;
+}
+@keyframes blinker {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.hidden {
+  display: none;
+}
+.text-center {
+  text-align: center !important;
+}
+.text-left {
+  text-align: left !important;
+}
+.text-right {
+  text-align: right !important;
+}
+.text-bold {
+  font-weight: 100;
+}
+body {
+  height: 100%;
+  font-family: 'C64', monospace;
+  background: #222;
+  color: #33ee33;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+a {
+  color: #ffb000;
+}
+#main {
+  margin-top: 40px;
+}
+.container {
+  margin: auto;
+  width: 95%;
+}
+footer {
+  font-family: 'VT323', monospace;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  font-size: 16px;
+  background: #372c8f;
+}
+footer .container {
+  padding: 15px 30px;
+}
+footer h3 {
+  color: #a199e5;
+  font-size: 16px;
+  text-align: left;
+  font-weight: 400;
+  margin: 0;
+}
+#highscores {
+  background: #484848;
+  float: left;
+  padding-top: 0px;
+  margin: 0;
+  padding: 15px;
+  padding-right: 30px;
+  border: 13px solid #3c3c3c;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'C64', monospace;
+  box-shadow: 10px 6px 4px rgba(0, 0, 0, 0.4);
+}
+#highscores h3 {
+  text-align: center;
+}
+#highscores table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#highscores table thead th {
+  padding-bottom: 10px;
+  border-bottom: 2px solid #333;
+}
+#highscores table tbody {
+  background: #2f2f2f;
+}
+#highscores table td {
+  outline: 0;
+  border: 0;
+  padding: 10px 12px;
+}
+#highscores table tr {
+  outline: 0;
+  border: 0;
+  padding: 15px;
+}
+#highscores table .position {
+  font-style: italic;
+  font-size: 0.9em;
+}
+#highscores table .score {
+  vertical-align: central;
+  font-weight: bold;
+  text-align: center;
+}
+#highscores table .player-name {
+  text-align: right !important;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+#invader-canvas {
+  margin: auto;
+  width: 640px;
+  height: 480px;
+  background: #3e32a2;
+  border: 50px solid #7c71da;
+  position: relative;
+  height: 100%;
+  margin-left: 40px;
+  box-shadow: 10px 6px 4px rgba(0, 0, 0, 0.4);
+}
+.c64container {
+  font-family: "C64";
+  position: relative;
+  background: #3e32a2;
+  height: 480px;
+  color: #7c71da;
+  font-size: 14px;
+  padding: 2px;
+  line-height: 20px;
+  margin: auto;
+}
+.c64container span {
+  vertical-align: bottom;
+}
+.c64container .input_text {
+  display: inline-block;
+  text-transform: uppercase;
+  position: relative;
+  float: left;
+}
+.c64container .input_text.old-line {
+  display: block;
+  float: none;
+}
+.c64container .input_text .error {
+  margin-top: 0.8em;
+}
+.c64container .cursor {
+  float: right;
+  width: 0.75em;
+  height: 0.85em;
+  margin-left: 2px;
+  background: #7c71da;
+}
+button {
+  float: left;
+  font-family: Consolas;
+  margin-left: 20px;
+  font-size: 20px;
+  padding: 15px 10px;
+  cursor: pointer;
+}
+#start_game_btn {
+  position: absolute;
+  left: 30%;
+  top: 45%;
+  padding: 15px 20px;
+  width: 40%;
+  height: 15%;
+}
+.w-25 {
+  width: 25%;
+  display: inline-block;
+}
+.w-33 {
+  width: 33%;
+  display: inline-block;
+}
+.w-50 {
+  width: 50%;
+  display: inline-block;
+}
+.w-100 {
+  width: 100%;
+  display: inline-block;
+}
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(100, 0, 0, 0.25);
+  display: table;
+  transition: opacity 0.3s ease;
+}
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+.modal-container {
+  width: 300px;
+  margin: 0px auto;
+  padding: 20px 10px 35px 20px;
+  background-color: #f11;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease;
+  font-family: Consolas;
+}
+.modal-header h3 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #eee;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.43);
+}
+.modal-header h3 small {
+  font-size: 12px;
+}
+.modal-body {
+  margin: 20px 0;
+}
+.modal-default-button {
+  float: right;
+  padding: 3px 15px;
+  font-family: Consolas;
+  font-size: 15px;
+}
+input {
+  width: auto;
+  outline: none;
+  font-family: Consolas;
+  font-size: 15px;
+}
+.modal-enter {
+  opacity: 0;
+}
+.modal-leave-active {
+  opacity: 0;
+}
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
