@@ -73,11 +73,6 @@
                 this.addLine("LOADING.");
 
                 _self.$parent.startGame();
-
-                /* FAKE LOADING TIME, CAUSE C64
-                /setTimeout(function () {
-                    _self.$parent.startGame();
-                }, 5000);*/
             },
             help() {
                 this.addLine("AVAILABLE COMMANDS:", "error");

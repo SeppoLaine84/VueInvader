@@ -29,33 +29,25 @@ class Player extends GameSprite {
         if (this.mgr.GameData.t && this.mgr.GameData.mouseData && this.IsAlive) {
             this.DoMovement();
             this.Shoot();
-            this.CheckBounds();
+            
         }
     }
 
     DoMovement() {
         var mouseDir = 0;
         var mouseData = this.mgr.GameData.mouseData;
-       
         
-        if (mouseData.x >this.position.x) mouseDir = 1;
-        else if (mouseData.x < this.position.x) mouseDir = -1;
-
+        if (mouseData.x > this.position.x+2) mouseDir = 1;
+        else if (mouseData.x < this.position.x-2) mouseDir = -1;
+       
+        var vel = mouseDir * this.MovementSpeed;
+       
+        this.SetVelocity(vel, 0);
         var x = this.position.x;
-
-        var vel = (mouseDir * this.MovementSpeed);
-        if (vel > this.MovementSpeed) {
-            vel = this.MovementSpeed;
-        }
-        else if (vel < -this.MovementSpeed) {
-            vel = -this.MovementSpeed;
-        }
-        this.SetVelocity(vel);
-
         x += this.velocity.x * this.mgr.GameData.dt;
 
-        this.SetPosition(parseInt(x), this.originalPosition.y);
-      
+        this.SetPosition(x, this.originalPosition.y);
+        this.CheckBounds();
     }
 
     SetPosition(x, y) {

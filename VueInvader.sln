@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "VueInvader", "VueInvader.njsproj", "{6E80DEE4-86D3-45FE-A19B-6AB6F0B428A1}"
 EndProject
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "VueInvaderBackEnd", "..\VueInvaderBackEnd\VueInvaderBackEnd.njsproj", "{AE95063E-984E-45F3-9939-6D27762ABCB5}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "VueInvaderBackEnd", "..\VueInvaderBackEnd\VueInvaderBackEnd\VueInvaderBackEnd.njsproj", "{AE95063E-984E-45F3-9939-6D27762ABCB5}"
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "VueInvaders", "..\temp\VueInvaders.njsproj", "{D2B6177B-6F3D-4E53-BCA5-440C728EBB6F}"
 EndProject

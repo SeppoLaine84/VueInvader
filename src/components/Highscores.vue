@@ -1,5 +1,5 @@
 ﻿<template>
-    <div id="highscores"  class="w-25">
+    <div id="highscores" class="w-25">
         <table>
             <thead>
                 <tr>
@@ -27,10 +27,11 @@
         constructor(name, score, cb = function () { }) {
            
             this.doc = { name: name, score: score };
-
+            
             axios({ method: 'post', url: 'http://localhost:3000/scores/add', data: this.doc, }).then(function (response) {
-            }).catch(function (error) {
-                console.log(error);
+                cb(response);
+            }).catch(function () {
+               
             });
         
         }
@@ -45,12 +46,12 @@
         },
         methods: {
             addHighscore: function (name, score) {
-                var hs = new Highscore(name, score, function (err, newdoc) {
-                    if (err) console.err(err);
+                var hs = new Highscore(name, score, function (newdoc) {
                     this.getHighscores();
                 });
             },
             getHighscores: function () {
+                console.log("Getting highscores.");
                 var _self = this;
                 axios.get('http://localhost:3000/scores').then(function (scores) {
                     _self.highscoreTable = scores.data;

@@ -165,9 +165,9 @@ class GameEngine {
         return explosion;
     }
 
-    // Add score text?
+    // Add score text
     addScore(text, x, y) {
-        this.GameData.scoreText = new PIXI.Text(text, { fontFamily: 'Consolas', fontSize: 14, fill: 0x33ee33, align: 'center' });
+        this.GameData.scoreText = new PIXI.Text(text, { fontFamily: 'C64', fontSize: 14, fill: 0x33ee33, align: 'center' });
         this.GameData.scoreText.position.x = x;
         this.GameData.scoreText.position.y = y;
         container.addChild(this.GameData.scoreText);
@@ -176,7 +176,7 @@ class GameEngine {
 
     // Adds text
     addText(text, x, y, size = 14, fill = 0x33ee33) {
-        var _text = new PIXI.Text(text, { fontFamily: 'Consolas', fontSize: size, fill: fill, align: 'center' });
+        var _text = new PIXI.Text(text, { fontFamily: 'C64', fontSize: size, fill: fill, align: 'center' });
         _text.position.x = x;
         _text.position.y = y;
         container.addChild(_text);
@@ -300,7 +300,7 @@ class GameEngine {
     // Checks if enemies get bottom of screen
     checkForGameOver(gameObject) {
         if (gameObject instanceof Enemy) {
-            if (gameObject.position.y >= this.GameInfo.resolution.height - 5 && !this.GameData.GameOver) {
+            if (gameObject.position.y >= this.GameInfo.resolution.height - gameObject.Area.height && !this.GameData.GameOver) {
                 console.log("GAME OVER");
                 this.GameData.GameOver = true;
                 this.GameData.GameOverTime = this.GameData.t;

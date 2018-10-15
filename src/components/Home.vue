@@ -1,9 +1,8 @@
 <template>
     <div id="main">
-        <Highscores ref="highscore_el" />
+        <Highscores v-bind:class="{ opacity0: !running }" ref="highscore_el"/>
         <div id="invader-canvas" class="w-50">
-                                    
-            <C64Console  v-show="!running"></C64Console>
+            <C64Console v-show="!running"></C64Console>
             <canvas id="cvs"  v-show="running"></canvas>
         </div>
 
@@ -183,6 +182,7 @@
             updateScore(amt) {
                 engine.GameData.score += amt;
                 engine.GameData.scoreText.text = "SCORE: " + engine.GameData.score.toString();
+               
             },
             // Saves scores to database
             saveHighscore() {

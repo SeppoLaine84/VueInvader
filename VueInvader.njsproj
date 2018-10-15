@@ -32,6 +32,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include=".babelrc" />
+    <Content Include="src\assets\styles\fonts\C64_Pro-STYLE.eot" />
+    <Content Include="src\assets\styles\fonts\C64_Pro-STYLE.svg" />
+    <Content Include="src\assets\styles\fonts\C64_Pro-STYLE.ttf" />
+    <Content Include="src\assets\styles\fonts\C64_Pro-STYLE.woff" />
+    <Content Include="src\assets\styles\fonts\C64_Pro-STYLE.woff2" />
+    <Content Include="src\assets\styles\fonts\C64_Pro_Mono-STYLE.eot" />
+    <Content Include="src\assets\styles\fonts\C64_Pro_Mono-STYLE.svg" />
+    <Content Include="src\assets\styles\fonts\C64_Pro_Mono-STYLE.ttf" />
+    <Content Include="src\assets\styles\fonts\C64_Pro_Mono-STYLE.woff" />
+    <Content Include="src\assets\styles\fonts\C64_Pro_Mono-STYLE.woff2" />
     <Content Include="public\img\bullet.png" />
     <Content Include="public\img\enemy_ship.png" />
     <Content Include="public\img\explosion\explosion_0.png" />
@@ -49,8 +59,13 @@
     <Content Include="src\assets\styles\styles.min.css">
       <Publish>True</Publish>
     </Content>
+    <Content Include="src\components\C64Console.vue">
+      <SubType>Code</SubType>
+      <Publish>False</Publish>
+    </Content>
     <Content Include="src\components\Modal.vue">
       <SubType>Code</SubType>
+      <Publish>False</Publish>
     </Content>
     <None Include="compilerconfig.json" />
     <Content Include="compilerconfig.json.defaults">
@@ -68,8 +83,11 @@
     </Content>
     <Content Include="src\components\Highscores.vue">
       <SubType>Code</SubType>
+      <Publish>False</Publish>
     </Content>
-    <Content Include="src\components\Home.vue" />
+    <Content Include="src\components\Home.vue">
+      <Publish>False</Publish>
+    </Content>
     <Content Include="package.json" />
     <Content Include="README.md" />
   </ItemGroup>
@@ -78,6 +96,7 @@
     <Folder Include="public\" />
     <Folder Include="public\img\" />
     <Folder Include="public\img\explosion\" />
+    <Folder Include="src\assets\styles\fonts\" />
     <Folder Include="src\" />
     <Folder Include="src\assets\" />
     <Folder Include="src\assets\styles\" />
