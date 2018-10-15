@@ -22,13 +22,15 @@
 <script>
 
     import axios from 'axios';
+    import Config from './../config';
 
     class Highscore {
         constructor(name, score, cb = function () { }) {
            
             this.doc = { name: name, score: score };
-            
-            axios({ method: 'post', url: 'http://localhost:3000/scores/add', data: this.doc, }).then(function (response) {
+
+            axios({
+                method: 'post', url: 'http://' + Config.backendUrl + '/scores/add', data: this.doc, }).then(function (response) {
                 cb(response);
             }).catch(function () {
                
@@ -53,7 +55,7 @@
             getHighscores: function () {
                 console.log("Getting highscores.");
                 var _self = this;
-                axios.get('http://localhost:3000/scores').then(function (scores) {
+                axios.get('http://' + Config.backendUrl + '/scores').then(function (scores) {
                     _self.highscoreTable = scores.data;
                 }).catch(function (error) {
                     console.log(error);

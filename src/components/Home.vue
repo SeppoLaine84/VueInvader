@@ -59,7 +59,7 @@
     import { GameEngine } from './../Game/GameEngine.js';
     import { Timer } from './../Game/Helpers';
     import C64Console from './C64Console.vue';
-
+    import Config from './../config';
 
     var engine;
     var enemySpawnTimer;
@@ -141,7 +141,7 @@
                 console.log("Loading content...");
 
                 engine.addPlayer();
-                this.gameoverShader = engine.addShader("GameOverFX", 'http://localhost:3000/shaders/gameover.frag', { val: { type: 'float', value: 0 } })
+                this.gameoverShader = engine.addShader("GameOverFX", 'http://' + Config.backendUrl+ '/shaders /gameover.frag', { val: { type: 'float', value: 0 } })
                 this.gameoverShader.update = function () {
                     count -= Math.pow(0.15 * Math.random(), 2);
                     uniforms = {

@@ -7,3 +7,5 @@
 	
 	More stuff is coming!
 
+#Known Issues
+	- Game doesnt run properly after game over and running again.
