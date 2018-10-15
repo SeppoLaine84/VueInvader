@@ -2,6 +2,9 @@
   font-family: "C64";
   src: url("fonts/C64_Pro_Mono-STYLE.ttf") format("truetype");
 }
+.opacity0 {
+  opacity: 0;
+}
 .ui-hidden-accessible {
   position: absolute !important;
   height: 1px;
